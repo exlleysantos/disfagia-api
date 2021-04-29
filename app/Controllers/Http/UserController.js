@@ -8,15 +8,22 @@ class UserController {
     }
 
     async store({request}){
-        const data = request.only(["fullname","email", "password"])
+        const data = request.only(["fullname","email", "password", "type"])
 
         return User.create(data);
     }
 
-    async show ({params}) {
+    async show ({ params }) {
         return User.findOrFail(params.id)  
     }
-
+    async update({ params, request }) {
+        const user = await User.findOrFail(params.id);
+        const data = request.only(["fullname, password"]);
+        
+        user.merge(data);
+        await user.save();
+        return user; 
+    }
     async destroy({params, auth, response}){
         const user = await User.findOrFail(params.id)
         console.log(user)

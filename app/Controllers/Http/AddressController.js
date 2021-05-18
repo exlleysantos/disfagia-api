@@ -26,8 +26,9 @@ class AddressController {
    * @param {object} ctx
    * @param {Request} ctx.request
    */
-  async store ({ request }) {
+  async store ({request, params}) {
     const data = request.only(["country","state", "city", "street"]);
+    data.user_id = params.userId;
 
     return Address.create(data);
   }
@@ -42,7 +43,7 @@ class AddressController {
    * @param {View} ctx.view
    */
   async show ({ params }) {
-    return Address.findOrFail(params.id);
+    return Address.findOrFail(params.addressId);
   }
 
   /**
@@ -53,7 +54,7 @@ class AddressController {
    * @param {Request} ctx.request
    */
   async update ({ params, request }) {
-    const address = await Address.findOrFail(params.id);
+    const address = await Address.findOrFail(params.addressId);
     const data = request.only(["country", "state", "city", "street"]);
     
     await address.merge(data);

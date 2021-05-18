@@ -18,6 +18,13 @@ const Route = use('Route')
 
 Route.resource('/users', 'UserController').apiOnly();
 
+//Address routes
+Route.get('/adresses', 'AddressController.index');
+Route.get('/adresses/:addressId', 'AddressController.show');
+Route.delete('/adresses/:addressId', 'AddressController.destroy');
+Route.put('/adresses/:addressId', 'AddressController.update');
+Route.post('/users/:userId/adresses', 'AddressController.store');
+
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 })

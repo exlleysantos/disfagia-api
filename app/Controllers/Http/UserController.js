@@ -4,7 +4,7 @@ const User = use("App/Models/User");
 
 class UserController {
     async index () {
-        return User.all();
+        return User.query().with('adresses').fetch();
     }
 
     async store({request}){
@@ -18,7 +18,7 @@ class UserController {
     }
     async update({ params, request }) {
         const user = await User.findOrFail(params.id);
-        const data = request.only(["fullname", "password"]);
+        const data = request.only(["fullname", "password", "birthdate"]);
         
         user.merge(data);
         await user.save();

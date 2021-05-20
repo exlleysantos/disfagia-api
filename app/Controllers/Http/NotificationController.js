@@ -5,12 +5,12 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 /**
- * Resourceful controller for interacting with anamnese
+ * Resourceful controller for interacting with notifications
  */
-class AnamneseController {
+class NotificationController {
   /**
-   * Show a list of all anamnese.
-   * GET anamnese
+   * Show a list of all notifications.
+   * GET notifications
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -21,8 +21,8 @@ class AnamneseController {
   }
 
   /**
-   * Render a form to be used for creating a new anamnese.
-   * GET anamnese/create
+   * Render a form to be used for creating a new notification.
+   * GET notifications/create
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -33,8 +33,8 @@ class AnamneseController {
   }
 
   /**
-   * Create/save a new anamnese.
-   * POST anamnese
+   * Create/save a new notification.
+   * POST notifications
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -44,8 +44,8 @@ class AnamneseController {
   }
 
   /**
-   * Display a single anamnese.
-   * GET anamnese/:id
+   * Display a single notification.
+   * GET notifications/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -56,8 +56,8 @@ class AnamneseController {
   }
 
   /**
-   * Render a form to update an existing anamnese.
-   * GET anamnese/:id/edit
+   * Render a form to update an existing notification.
+   * GET notifications/:id/edit
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -68,8 +68,8 @@ class AnamneseController {
   }
 
   /**
-   * Update anamnese details.
-   * PUT or PATCH anamnese/:id
+   * Update notification details.
+   * PUT or PATCH notifications/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -79,8 +79,8 @@ class AnamneseController {
   }
 
   /**
-   * Delete a anamnese with id.
-   * DELETE anamnese/:id
+   * Delete a notification with id.
+   * DELETE notifications/:id
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -90,4 +90,4 @@ class AnamneseController {
   }
 }
 
-module.exports = AnamneseController
+module.exports = NotificationController

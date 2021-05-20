@@ -4,7 +4,7 @@ const User = use("App/Models/User");
 
 class UserController {
     async index () {
-        return User.query().with('adresses').fetch();
+        return User.query().with('adresses').with('medicalRecords').fetch();
     }
 
     async store({request}){
@@ -14,7 +14,9 @@ class UserController {
     }
 
     async show ({ params }) {
-        return User.findOrFail(params.id)  
+        const user = await User.findOrFail(params.id);
+        await user.loadMany(['adresses', 'medicalRecords'])
+        return user;
     }
     async update({ params, request }) {
         const user = await User.findOrFail(params.id);

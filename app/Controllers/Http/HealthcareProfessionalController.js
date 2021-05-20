@@ -1,5 +1,5 @@
 'use strict'
-
+const HealthcareProfessional = use('App/Models/HealthcareProfessional')
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
@@ -17,7 +17,8 @@ class HealthcareProfessionalController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
+  async index () {
+    return HealthcareProfessional.all()
   }
 
   /**
@@ -41,6 +42,9 @@ class HealthcareProfessionalController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const data = request.only(["name", "email", "password"])
+
+    return HealthcareProfessional.create(data);
   }
 
   /**
@@ -52,7 +56,10 @@ class HealthcareProfessionalController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show ({ params }) {
+    const professional = await HealthcareProfessional.findOrFail(params.id);
+    await professional.load('patients');
+    return professional;
   }
 
   /**

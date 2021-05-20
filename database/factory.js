@@ -48,7 +48,7 @@ Factory.blueprint('App/Models/Disease', (faker) => {
 Factory.blueprint('App/Models/HealthcareProfessional', (faker) => {
     return {
         name: faker.string(),
-        username: faker.string(),
+        email: faker.email(),
         password: faker.password()
     }
 });

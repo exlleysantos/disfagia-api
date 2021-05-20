@@ -49,9 +49,15 @@ class User extends Model {
   notifications() { 
     return this.hasMany('App/Models/Notification')
   }
+  consultation () {
+    return this.belongsToMany('App/Models/Consultation')
+  }
 
+  healthcareProfessionals() {
+    return this.belongsToMany('App/Models/HealthcareProfessional').pivotTable('consultations')
+  }
   diseases() {
-    return this.belongsToMany('App/Models/Disease','disease_id','user_id','id','id')
+    return this.belongsToMany('App/Models/Disease').pivotTable('user_disease')
   }
 }
 

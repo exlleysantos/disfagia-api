@@ -6,7 +6,7 @@ const Model = use('Model')
 class Disease extends Model {
 
     users () {
-        return this.belongsToMany('App/Models/Users','user_id','disease_id','id','id')
+        return this.belongsToMany('App/Models/Users').pivotTable('user_disease')
     }
 
 }

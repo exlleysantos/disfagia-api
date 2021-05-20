@@ -8,7 +8,7 @@ class HealthcareProfessionalSchema extends Schema {
     this.create('healthcare_professionals', (table) => {
       table.increments()
       table.string('name')
-      table.string('username')
+      table.string('email', 254).notNullable().unique()
       table.string('password')
 
       table.integer('specialty_id')

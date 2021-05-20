@@ -4,7 +4,6 @@
 const Model = use('Model')
 
 class Consultation extends Model {
-
 }
 
 module.exports = Consultation

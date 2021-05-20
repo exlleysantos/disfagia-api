@@ -4,18 +4,34 @@ const User = use("App/Models/User");
 
 class UserController {
     async index () {
-        return User.query().with('adresses').with('medicalRecords').fetch();
+        return User.query().with('adresses').with('medicalRecords').with('diseases').fetch();
     }
 
     async store({request}){
-        const data = request.only(["fullname","email", "password", "type"])
+        const {adresses, medicalRecords, diseases, ...data} = request.only(["fullname","email", "password", "type", "adresses", "medicalRecords"])
+        
+        const user = await User.create(data);
 
-        return User.create(data);
+        if(adresses && adresses.lenght > 0) {
+            await user.adresses().attach(adresses)
+            await user.load('adresses')
+        }
+
+        if(medicalRecords && medicalRecords.lenght > 0) {
+            await user.medicalRecords().attach(medicalRecords)
+            await user.load('medicalRecords')
+        }
+
+        if(diseases && diseases.lenght > 0) {
+            await user.diseases().attach(diseases)
+            await user.load('diseases')
+        }
+        return 
     }
 
     async show ({ params }) {
         const user = await User.findOrFail(params.id);
-        await user.loadMany(['adresses', 'medicalRecords'])
+        await user.loadMany(['adresses', 'medicalRecords', 'diseases'])
         return user;
     }
     async update({ params, request }) {

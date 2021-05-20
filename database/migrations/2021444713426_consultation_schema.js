@@ -12,11 +12,15 @@ class ConsultationSchema extends Schema {
       .unsigned()
       .references('id')
       .inTable('users')
+      .onDelete('cascade')
+      .index('user_id')
 
-      table.integer('medical_id')
+      table.integer('healthcare_professional_id')
       .unsigned()
       .references('id')
       .inTable('healthcare_professionals')
+      .onDelete('cascade')
+      .index('healthcare_professional_id')
 
       table.string('observation', 500)
 

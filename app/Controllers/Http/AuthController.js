@@ -1,20 +1,21 @@
 'use strict'
-const User = use("App/Models/User");
+const HealthcareProfessional = use("App/Models/HealthcareProfessional");
+const Token = use('App/Models/Token')
 
 class AuthController {
 
-    async auth({request, auth, response}){
-        const { email, password } = request.only(['email', 'password']);
-
-        const user = User.findBy('email', email);
-
-        if (!user) {
-            return response.status(404).json({message: 'User Not Found'});
+    async store({request, auth, response}){
+        const { email, password } = request.all();
+        const healthcareProfessional = await HealthcareProfessional.findBy('email', email );
+        console.log("mostra usuário", healthcareProfessional);
+        
+        if (!healthcareProfessional) {
+            return response.status(404).json({message: 'HealthcareProfessional Not Found'});
         }
-  
+        
         const token = await auth.attempt(email, password);
-  
-        return response.status(200).json({user, token});
+        console.log("logado")
+        return response.status(200).json({healthcareProfessional, token});
 		
     }
 }

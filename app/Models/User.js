@@ -42,6 +42,17 @@ class User extends Model {
   adresses () {
     return this.hasMany('App/Models/Address')
   }
+  medicalRecords () {
+    return this.hasMany('App/Models/MedicalRecord')
+  }
+
+  notifications() { 
+    return this.hasMany('App/Models/Notification')
+  }
+
+  diseases() {
+    return this.belongsToMany('App/Models/Disease','disease_id','user_id','id','id')
+  }
 }
 
 module.exports = User

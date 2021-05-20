@@ -18,6 +18,7 @@ const Route = use('Route')
 
 Route.resource('/users', 'UserController').apiOnly();
 
+Route.post('/login', 'AuthController.auth');
 //Address routes
 Route.get('/adresses', 'AddressController.index');
 Route.get('/adresses/:addressId', 'AddressController.show');

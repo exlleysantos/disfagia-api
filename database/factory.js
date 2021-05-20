@@ -12,10 +12,43 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-// const Factory = use('Factory')
+ const Factory = use('Factory')
 
-// Factory.blueprint('App/Models/User', (faker) => {
-//   return {
-//     username: faker.username()
-//   }
-// })
+Factory.blueprint('App/Models/User', (faker) => {
+   return {
+     fullname: faker.string(),
+     email: faker.email(),
+     password: faker.string(),
+     birthdate: faker.date()
+
+   }
+});
+
+Factory.blueprint('App/Models/Address', (faker) => {
+    return {
+        country: faker.string(),
+        state: faker.string(2),
+        city: faker.string(20),
+        street: faker.string(50)
+    }
+});
+
+Factory.blueprint('App/Models/MedicalRecord', (faker) =>{
+    return {
+        height: faker.integer({ min: 1, max: 230 })
+    }
+});
+/*
+Factory.blueprint('App/Models/Disease', (faker) => {
+    return {
+        name: faker.string()
+    }
+})
+*/
+Factory.blueprint('App/Models/HealthcareProfessional', (faker) => {
+    return {
+        name: faker.string(),
+        username: faker.string(),
+        password: faker.password()
+    }
+});

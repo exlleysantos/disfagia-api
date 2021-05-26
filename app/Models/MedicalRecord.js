@@ -11,7 +11,15 @@ class MedicalRecord extends Model {
 
     diseases () {
         return this.hasMany('App/Models/Disease')
-      }
+    }
+
+    eat10() {
+        return this.hasOne('App/Models/Eat10')
+    }
+
+    gna() {
+        return this.hasOne('App/Models/GlobalNutritionalAssessment')
+    }
 }
 
 module.exports = MedicalRecord

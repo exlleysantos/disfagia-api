@@ -1,6 +1,7 @@
 'use strict'
 
 const ConsultationController = require('../app/Controllers/Http/ConsultationController');
+const DiseaseController = require('../app/Controllers/Http/DiseaseController');
 
 /*
 |--------------------------------------------------------------------------
@@ -27,16 +28,32 @@ Route.get('/healthcare-professionals/:id', 'HealthcareProfessionalController.sho
 Route.post('/login', 'AuthController.store');
 Route.get('/login', 'AuthController.show');
 //Address routes
-
-//consultation
-Route.post('/consultations', 'ConsultationController.store');
 Route.get('/adresses', 'AddressController.index');
 Route.get('/adresses/:addressId', 'AddressController.show');
 Route.delete('/adresses/:addressId', 'AddressController.destroy');
 Route.put('/adresses/:addressId', 'AddressController.update');
 Route.post('/users/:userId/adresses', 'AddressController.store');
 
+//consultation
+Route.get('/consultations', 'ConsultationController.index');
+Route.post('/consultations', 'ConsultationController.store');
+
+//Diseases
+Route.get('/diseases', 'DiseaseController.index');
 Route.post('/diseases', 'DiseaseController.store');
+
+//MedicalRecords
+Route.get('/medicalRecords', 'MedicalRecordController.index');
+Route.post('/medicalRecords', 'MedicalRecordController.store');
+
+//Eat10
+Route.get('/eat10s', 'Eat10Controller.index');
+Route.post('/eat10s', 'Eat10Controller.store');
+
+//Gnas
+Route.get('/gnas', 'GlobalNutritionalAssessmentController.index');
+Route.post('/gnas', 'GlobalNutritionalAssessmentController.store');
+
 
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }

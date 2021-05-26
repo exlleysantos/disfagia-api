@@ -26,7 +26,7 @@ class UserController {
             await user.diseases().attach(diseases)
             await user.load('diseases')
         }
-        return 
+        return user;
     }
 
     async show ({ params }) {

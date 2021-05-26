@@ -1,4 +1,6 @@
 'use strict'
+const Disease = use('App/Models/Disease')
+const User = use('App/Models/User')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -13,23 +15,10 @@ class DiseaseController {
    * GET diseases
    *
    * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-  }
-
-  /**
-   * Render a form to be used for creating a new disease.
-   * GET diseases/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
+  async index () {
+    const diseases = Disease.all()
+    return diseases;
   }
 
   /**
@@ -38,33 +27,12 @@ class DiseaseController {
    *
    * @param {object} ctx
    * @param {Request} ctx.request
-   * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
-  }
+  async store ({ request }) {
+    const data = request.only(['name']);
+    
+    return Disease.create(data);
 
-  /**
-   * Display a single disease.
-   * GET diseases/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
-  }
-
-  /**
-   * Render a form to update an existing disease.
-   * GET diseases/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
   }
 
   /**

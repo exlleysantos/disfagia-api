@@ -7,6 +7,14 @@ class GlobalNutritionalAssessmentSchema extends Schema {
   up () {
     this.create('global_nutritional_assessments', (table) => {
       table.increments()
+
+      table.integer('medical_record_id')
+      .unsigned()
+      .references('id')
+      .inTable('medical_records')
+      .index('medical_record_id')
+      .onDelete('cascade')
+
       table.timestamps()
     })
   }

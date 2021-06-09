@@ -11,7 +11,7 @@ class UserSchema extends Schema {
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
       table.string('cpf', 12)
-      table.date('birthdate').notNullable()
+      table.date('birthdate')
       table.enu('sex', ['male', 'female'])
       table.enu('type', ['patient', 'nutritionist', 'speech_therapist', 'nurse']).notNullable()
       table.timestamps()

@@ -20,13 +20,15 @@ const DiseaseController = require('../app/Controllers/Http/DiseaseController');
 const Route = use('Route')
 
 Route.resource('/users', 'UserController').apiOnly();
-//Route.get('/users/:id/patients', 'ConsultationController.indexPatients');
 
-Route.post('/healthcare-professionals', 'HealthcareProfessionalController.store');
-Route.get('/healthcare-professionals/:id', 'HealthcareProfessionalController.show');
 //session routes
 Route.post('/login', 'AuthController.store');
 Route.get('/login', 'AuthController.show');
+
+//healthcare professional
+Route.post('/healthcare-professionals', 'HealthcareProfessionalController.store');
+Route.get('/healthcare-professionals/:id', 'HealthcareProfessionalController.show');
+
 //Address routes
 Route.get('/adresses', 'AddressController.index');
 Route.get('/adresses/:addressId', 'AddressController.show');
@@ -44,7 +46,7 @@ Route.post('/diseases', 'DiseaseController.store');
 
 //MedicalRecords
 Route.get('/medicalRecords', 'MedicalRecordController.index');
-Route.post('/medicalRecords', 'MedicalRecordController.store');
+Route.post('users/:userId/medicalRecords', 'MedicalRecordController.store');
 
 //Eat10
 Route.get('/eat10s', 'Eat10Controller.index');

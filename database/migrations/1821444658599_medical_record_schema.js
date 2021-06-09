@@ -9,6 +9,8 @@ class MedicalRecordSchema extends Schema {
       table.increments()
       
       table.integer('height')
+
+      table.enu('sex', ['male', 'female'])
       
       table.enu('physical_type', ['brevilineo', 'normolineo', 'longilineo'])
       
@@ -20,9 +22,9 @@ class MedicalRecordSchema extends Schema {
       table.float('ideal_weight_percentage', [6], [3])
       table.float('loss_weight_percentage', [6], [3])
 
-      table.float('bmi', [3], [1])
+      table.float('bmi')
       
-      table.integer('knee height')
+      table.integer('knee_height')
       table.integer('arm_circumference')
       table.integer('calf_circumference')
       table.integer('waist_circumference')
@@ -43,18 +45,6 @@ class MedicalRecordSchema extends Schema {
       .unsigned()
       .references('id')
       .inTable('users')
-      .onDelete('cascade')
-
-      table.integer('eat10_id')
-      .unsigned()
-      .references('id')
-      .inTable('eat_10_s')
-      .onDelete('cascade')
-
-      table.integer('gna_id')
-      .unsigned()
-      .references('id')
-      .inTable('global_nutritional_assessments')
       .onDelete('cascade')
 
       table.timestamps()

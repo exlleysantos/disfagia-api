@@ -1,12 +1,40 @@
 'use strict'
+const MedicalRecord = use("App/Models/MedicalRecord")
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
 /**
  * Resourceful controller for interacting with medicalrecords
  */
+ const getFields = (request) =>
+ request.only([
+     'height',
+     'sex',
+     'physical_type',
+     'current_weight',
+     'usual_weight',
+     'ideal_weight',
+     'usual_weight_percentage',
+     'ideal_weight_percentage',
+     'loss_weight_percentage',
+     'bmi',
+     'knee_height',
+     'arm_circumference',
+     'calf_circumference',
+     'waist_circumference',
+     'depletion',
+     'basal_energy_spend',
+     'total_energy_expenditure',
+     'dentition',
+     'work_hours',
+     'has_allergy',
+     'alcohol',
+     'tobacco',
+     'eat10_id',
+     'gna_id',
+ ]);
+
 class MedicalRecordController {
   /**
    * Show a list of all medicalrecords.
@@ -18,19 +46,7 @@ class MedicalRecordController {
    * @param {View} ctx.view
    */
   async index () {
-    return Address.all();
-  }
-
-  /**
-   * Render a form to be used for creating a new medicalrecord.
-   * GET medicalrecords/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
+    return MedicalRecord.query().with('eat10').with('gna').fetch();
   }
 
   /**
@@ -41,31 +57,13 @@ class MedicalRecordController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
-  }
+  async store ({ request, params }) {
+    const data = getFields(request);
+    const user_id = params.userId;
 
-  /**
-   * Display a single medicalrecord.
-   * GET medicalrecords/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
-  }
+    const medicalRecord = await MedicalRecord.create({user_id, ...data})
 
-  /**
-   * Render a form to update an existing medicalrecord.
-   * GET medicalrecords/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
+    return medicalRecord;
   }
 
   /**
